@@ -9,9 +9,9 @@ app.use(express.json());
 
 const routes = router;
 
-app.use("/",routes);
-
-console.log("hello world")
+app.use("/api/blogs/",routes);
+ 
+// app.use("/api/categories")
 
 app.listen(PORT,() => console.log(`server is running on port ${PORT}`));
 

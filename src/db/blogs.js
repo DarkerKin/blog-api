@@ -10,6 +10,11 @@ publishedAt:null,
 }
 ]
 
+let uniqueId = blogs[blogs.length-1].id;
+export function nextUniqueId(){
+    uniqueId++;
+    return uniqueId;
+}
 /*
 {
 id:1,
