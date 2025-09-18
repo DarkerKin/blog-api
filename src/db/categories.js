@@ -27,3 +27,9 @@ export function getUniqueId(){
     uniqueId++;
     return uniqueId;
 }
+
+//categories.js
+export function resetDb() {
+categories.length = 0;
+nextId = categories.length;
+}

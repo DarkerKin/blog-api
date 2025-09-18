@@ -1,5 +1,4 @@
-import { getById,create,update} from '../repositories/blogRepo.js'
-import {getAll} from '../repositories/blogRepo.js'
+import { getById,create,update,remove,getAll} from '../repositories/blogRepo.js'
 export function getAllBlogs(query){
     return getAll(query)
 }
@@ -28,8 +27,16 @@ export function createBlog(data){
 }
 
 export function updateBlog(id, updates){
+    if(!updates || (!updates.title && !updates.content && !updates.author))
+        return {error:`No updateable fields provided`,status:400}
     const updateBlog = update(id, updates);
     
     if(updateBlog) return updateBlog;
     else return {error:`cannot find blog with ${id}`,status:404}
 }
+
+export function deleteBlog(id){
+    const result = remove(id);
+    if(result) return true;
+    else return {error:`cannot find blog with ${id}`,status:404}
+} 

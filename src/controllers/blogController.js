@@ -1,8 +1,8 @@
-import { getAllBlogs,getBlogById,createBlog,updateBlog } from "../services/blogService.js";
-
+import { getAllBlogs,getBlogById,createBlog,updateBlog ,deleteBlog} from "../services/blogService.js";
+import { matchedData } from "express-validator";
 
 export function getAllBlogsHandler(req,res){
-    let query = req.query;
+    let query = matchedData(req);
     let result = getAllBlogs(query);
     res.status(200).json(result);
 }
@@ -19,12 +19,14 @@ export function getBlogByIdHandler(req,res){
 export function createBlogHandler(req,res){
     let data = req.body;
     const newBlog = createBlog(data);
-    res.status(200).json(newBlog);
+    res.status(201).json(newBlog);
 }
 
 export function updatedBlogHandler(req,res){
     let id = parseInt(req.params.id)
     let updates = req.body;
+    console.log("updates in controller ",updates);
+    
     let updatedBlog = updateBlog(id,updates)
 
     if(!updatedBlog.error){
@@ -36,5 +38,9 @@ export function updatedBlogHandler(req,res){
 }
 
 export function deleteBlogHandler(req,res){
-    res.status(200).json({msg:"deleted"});
+    let id = parseInt(req.params.id);
+    const result = deleteBlog(id);
+    if(result.error){
+        res.status(result.status).json({error:result.error});
+    }else res.status(204).json();
 }

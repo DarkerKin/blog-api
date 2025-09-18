@@ -1,11 +1,19 @@
 import express from 'express';
-import morgan from 'morgan';
 import router from './routes/blogRoutes.js';
 import categoryRouter from './routes/categoryRoutes.js';
 const app = express();
-const PORT = 3000;
+const PORT =  process.env.PORT || 3000;
 
-app.use(morgan('tiny'));
+
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => console.log(`Server is running on port ${PORT}`));
+}
+
+if(process.env.NODE_ENV === "development"){
+    const morganModule = await import('morgan');
+    const morgan = morganModule.default;
+    app.use(morgan('tiny'))
+}
 app.use(express.json());
 
 const routes = router;

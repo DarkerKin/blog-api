@@ -5,20 +5,20 @@ export function getAll(query){
     if(query.author) {
         result = result.filter(
             (blog)=>{
-                blog.author.toLowerCase() === query.author.toLowerCase();
+                blog.author === query.author;
             }
         )
     }
 
     if(query.title){
         result = result.filter((blog) =>{
-            blog.title.toLowerCase().includes(query.title.toLowerCase())
+            blog.title.toLowerCase().includes(query.title)
         })
     }
 
-    if(query.result){
+    if(query.published){
         result = result.filter((blog)=>{
-            (blog) => blog.isPublished.toString() === query.published.toLowerCase()
+            (blog) => blog.isPublished === query.published
         })
     }
 
@@ -52,5 +52,15 @@ export function update(id, updates){
         return updatedBlog;
     }else{
         return null;
+    }
+}
+
+export function remove(id){
+    let index = blogs.findIndex((b) => b.id === id);
+    if(index !== -1){
+        blogs.splice(index,1);
+        return true;
+    }else{
+        return false;
     }
 }

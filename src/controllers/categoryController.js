@@ -27,7 +27,7 @@ export function getCategoryByIdHandler(req,res){
 
 //returns the new category that is created 
 export function createCategoryHandler(req,res){
-
+    
 }
 
 export function updatedCategoryHandler(req,res){}

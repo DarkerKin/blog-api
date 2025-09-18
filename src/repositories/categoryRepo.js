@@ -1,10 +1,6 @@
 import { categories, getUniqueId } from "../db/categories.js";
 
-// getCategoriesFromDB,
-// getCategoryByIdFromDB,
-// createCategoryInDB,
-// updateCategoryInDB,
-// deleteCategoryInDB
+
 
 export function getCategoriesFromDB(query){
     let result = [...categories]
@@ -20,6 +16,10 @@ export function createCategoryInDB(){
     
 }
 
-export function updateCategoryInDB(){}
+export function updateCategoryInDB(){
 
-export function deleteCategoryInDB(){}
+}
+
+export function deleteCategoryInDB(){
+    
+}
