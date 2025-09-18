@@ -19,9 +19,26 @@ export function getCategoryById(id){
     return {'error':`cannot find category with id ${id}`,'status':404}
 }
 
-export function createCategory(){}
+export function createCategory(data){
+    let category = {
+        name:data.name,
+    }
+    const newCategory = createCategoryInDB(category);
+    return newCategory;
+}
 
-export function updateCategory(){}
+export function updateCategory(id, updates){
+    let updatedCategory = updateCategoryInDB(id,updates)
+    if(updateCategory){
+        return updateCategory
+    }else{
+        return {error:`cannot find category with id ${id}`,status:404}
+    }
+}
 
-export function deleteCategory(){}
+export function deleteCategory(id){
+    const result = deleteCategoryInDB(id);
+    if(result) return true;
+    else return {error:`cannot find blog with ${id}`,status:404}
+}
 
